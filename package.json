@@ -1,0 +1,32 @@
+{
+  "name": "diskpilot",
+  "productName": "DiskPilot",
+  "version": "1.0.0",
+  "description": "A thoughtful Windows disk manager",
+  "author": "DiskPilot",
+  "license": "MIT",
+  "main": "src/main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test test/*.test.cjs",
+    "build": "electron-builder --win portable --x64"
+  },
+  "devDependencies": {
+    "electron": "44.5.1",
+    "electron-builder": "26.15.3"
+  },
+  "build": {
+    "appId": "local.diskpilot.desktop",
+    "asar": true,
+    "directories": { "output": "release" },
+    "files": ["src/**/*", "assets/**/*", "package.json"],
+    "extraResources": [{ "from": "native", "to": "native" }],
+    "win": {
+      "icon": "assets/icon.ico",
+      "target": "portable",
+      "requestedExecutionLevel": "asInvoker",
+      "artifactName": "DiskPilot-${version}-Windows-x64.exe"
+    },
+    "portable": { "requestExecutionLevel": "user" }
+  }
+}

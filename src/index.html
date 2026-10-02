@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>DiskPilot · 磁碟管家</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="titlebar"><span class="title-brand">DISKPILOT <span>／ 讓空間，各就其位。</span></span><div class="window-controls"><button data-window="minimize" aria-label="最小化">─</button><button data-window="maximize" aria-label="最大化">□</button><button data-window="close" aria-label="關閉">×</button></div></div>
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-icon"><i></i><i></i><i></i></div><div>DiskPilot<small>磁碟管家</small></div></div>
+    <div class="nav-caption">工作空間</div>
+    <nav><button class="nav-item active" data-page="disks"><span data-icon="drive"></span>磁碟總覽<span class="nav-dot"></span></button><button class="nav-item" data-page="history"><span data-icon="history"></span>操作紀錄</button><button class="nav-item" data-page="help"><span data-icon="help"></span>使用指南</button></nav>
+    <div class="sidebar-foot"><div class="local-badge"><span class="status-dot"></span>所有操作在本機完成</div><p>把空間留給重要的事。</p><span class="version">WINDOWS EDITION · 1.0</span></div>
+  </aside>
+  <main>
+    <header><div class="breadcrumb">工作空間 <span>/</span> <b id="breadcrumb-current">磁碟總覽</b></div><div class="header-right"><span class="machine" id="computer">本機電腦</span><button class="badge admin-badge" id="admin">檢查權限中</button></div></header>
+    <section id="page-disks" class="page">
+      <div class="page-heading"><div><div class="eyebrow">YOUR SPACE, REIMAGINED</div><h1>每一寸空間，都有安排<span class="green-period">。</span></h1><p>掌握磁碟狀態，輕鬆調整你的儲存空間。</p></div><button id="refresh" class="button secondary"><span data-icon="refresh"></span>重新整理</button></div>
+      <div class="overview-grid">
+        <article class="capacity-card"><div><div class="card-label">總儲存容量 <span id="disk-count" class="mini-pill">— 個磁碟</span></div><div class="big-value" id="total-capacity">— <small>GiB</small></div><div class="capacity-legend"><span><i class="legend-dot mint"></i>可用 <b id="total-free">—</b></span><span><i class="legend-dot dark"></i>已使用 <b id="total-used">—</b></span></div></div><div class="donut" id="donut"><div><b id="free-percent">—</b><span>可用空間</span></div></div></article>
+        <article class="health-card"><div class="health-icon" data-icon="shield"></div><span class="card-label">磁碟狀態</span><h2 id="health-title">正在讀取</h2><p id="health-detail">取得 Windows 儲存空間資訊</p><div class="health-footer"><span class="status-dot"></span><span id="scan-time">等待掃描</span></div></article>
+        <article class="tip-card"><span class="card-label">空間小筆記 <span data-icon="spark"></span></span><h2>大一點的空間，<br>多一點的可能。</h2><p>選擇分割區，預覽調整後的容量。確認套用後，變更才會生效。</p><button class="text-link" id="tip-help">了解如何擴充 <span>↗</span></button></article>
+      </div>
+      <div class="workspace-heading"><h2>我的磁碟 <span id="disk-tab-count">0</span></h2><div class="legend"><span><i class="legend-dot dark"></i>資料</span><span><i class="legend-dot purple"></i>系統／復原</span><span><i class="legend-dot empty"></i>未配置</span></div></div>
+      <div class="disk-workspace"><div class="disk-list" id="disk-list"><div class="empty-state"><div class="spinner"></div><h3>正在探索你的儲存空間</h3><p>初次讀取可能需要幾秒鐘。</p></div></div><aside class="inspector" id="inspector"><div class="inspector-empty"><span data-icon="cursor"></span><h3>選擇一個分割區</h3><p>點選左側磁碟配置圖，<br>查看容量與可用操作。</p></div></aside></div>
+      <div class="pending" id="pending" hidden></div>
+      <footer class="page-footer"><span><i class="status-dot"></i><span id="footer-status">正在連接 Windows 儲存服務</span></span><button id="export" class="text-link"><span data-icon="download"></span>匯出磁碟報告</button></footer>
+    </section>
+    <section id="page-history" class="page" hidden><div class="page-heading"><div><div class="eyebrow">EVERY CHANGE, REMEMBERED</div><h1>操作紀錄<span class="green-period">。</span></h1><p>每一次變更都有跡可循，儲存在這台電腦上。</p></div></div><div id="history-list"></div></section>
+    <section id="page-help" class="page" hidden><div class="page-heading"><div><div class="eyebrow">A LITTLE CLARITY GOES A LONG WAY</div><h1>讓空間調整更簡單<span class="green-period">。</span></h1><p>先了解配置，再做出適合你的調整。</p></div></div>
+      <div class="guide-grid"><article class="guide-card"><span class="guide-number">01</span><h2>延伸分割區</h2><p>點選 NTFS 分割區，再選「調整容量」。右側有相鄰未配置空間時，可以增加容量；拖動滑桿或輸入目標 GiB。</p><div class="guide-map"><i>C:</i><i class="guide-space">未配置</i><b>→</b><i>C: 更大空間</i></div></article><article class="guide-card"><span class="guide-number">02</span><h2>縮小與建立新槽</h2><p>縮小現有分割區後，會產生未配置空間。套用完成後，點選該空間即可建立新的 NTFS 分割區。Windows 會決定可縮小的最低容量。</p></article><article class="guide-card"><span class="guide-number">03</span><h2>復原區擋住延伸？</h2><p>若配置為「Windows → 復原區 → 未配置」，可使用「跨復原區延伸」。程式會保留 Windows RE 備份、重建復原區後延伸系統槽。</p><p class="subtle">此功能是進階操作。需要至少 2 GiB 系統槽可用空間；完整硬碟備份請另行保留。復原備份位於 C:\ProgramData\DiskPilot\Backups。</p></article><article class="guide-card"><span class="guide-number">04</span><h2>預覽、確認、套用</h2><p>所有變更都會先放入待執行清單。目前一次執行一個操作，每次完成後重新讀取配置。套用前仍可移除；開始後請保持電源連接。</p></article></div>
+      <article class="scope-card"><h2>這個版本的能力</h2><p>支援基本 GPT／MBR 磁碟的 NTFS 容量調整、新增分割區、重新命名，以及一般資料分割區的格式化與刪除。系統、啟動與復原分割區受到保護。</p><p>不包含硬碟複製、作業系統搬移、資料救援、任意分割區搬移、動態磁碟、Storage Spaces、邏輯分割區或加密磁碟變更。跨復原區延伸限指定配置；不會跨越一般資料分割區。</p><p>軟體能重新分配現有容量，無法增加實體硬碟容量。虛擬機器必須先由主機擴大虛擬硬碟，再回到這裡延伸分割區。</p><p class="subtle">DiskPilot 是獨立工具，並非 EaseUS 產品。1 GiB = 1,073,741,824 bytes。Windows 檔案總管通常將此單位標示為 GB。</p></article>
+    </section>
+  </main>
+  <div id="toast" role="status" hidden></div>
+  <div class="modal-backdrop" id="modal-backdrop" hidden><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" id="modal"></section></div>
+  <script src="renderer.js"></script>
+</body>
+</html>
